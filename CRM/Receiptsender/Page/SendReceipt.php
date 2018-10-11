@@ -8,7 +8,7 @@ class CRM_Receiptsender_Page_SendReceipt extends CRM_Core_Page {
     CRM_Utils_System::setTitle(E::ts('Send Receipt'));
     $uid = $_GET["user"];
     $contributionID = $_GET["contribution"];
-    if (isset($uid) && isset($conributionID)) {
+    if (isset($uid) && isset($contributionID)) {
       try {
         $result = civicrm_api3('Contribution', 'sendconfirmation', [
           'id' => $contributionID,
