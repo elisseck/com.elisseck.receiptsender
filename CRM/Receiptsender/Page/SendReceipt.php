@@ -16,6 +16,7 @@ class CRM_Receiptsender_Page_SendReceipt extends CRM_Core_Page {
       }
       catch (CiviCRM_API3_Exception $e) {
         $error = $e->getMessage();
+        watchdog('CiviCRM Receipt', $error);
         CRM_Core_Error::debug_log_message($error);
       }
     }
