@@ -1,28 +1,40 @@
 <?php
 use CRM_Receiptsender_ExtensionUtil as E;
 
-class CRM_Receiptsender_Page_SendReceipt extends CRM_Core_Page {
-
+class CRM_Receiptsender_Form_SendReceipt extends CRM_Contribute_Form_Task_PDF {
+/*
   public function run() {
     // Example: Set the page-title dynamically; alternatively, declare a static title in xml/Menu/*.xml
     CRM_Utils_System::setTitle(E::ts('Send Receipt'));
-    $uid = $_GET["user"];
+    $contactID = CRM_Core_Session::singleton()->getLoggedInContactID();
     $contributionID = $_GET["contribution"];
-    if (isset($uid) && isset($contributionID)) {
-      try {
-        $result = civicrm_api3('Contribution', 'sendconfirmation', [
-          'id' => $contributionID,
+    if (isset($contactID) && isset($contributionID)) {
+        $contact = civicrm_api3('Contact', 'getsingle', [
+          'id' => $contactID,
         ]);
-      }
-      catch (CiviCRM_API3_Exception $e) {
-        $error = $e->getMessage();
-        watchdog('CiviCRM Receipt', $error);
-        CRM_Core_Error::debug_log_message($error);
-      }
+        $from = civicrm_api3('domain', 'getsingle', [
+          'id' => 1,
+        ]);
+        list($sendReceipt, $subject, $message, $html) = CRM_Core_BAO_MessageTemplate::sendTemplate(
+          array(
+            'groupName' => 'msg_tpl_workflow_contribution',
+            'valueName' => 'contribution_offline_receipt',
+            'contactId' => $contact['id'],
+            'contributionId' => $contributionID,
+            'from' => $from['from_email'],
+            'toName' => $contact['display_name'],
+            'toEmail' => $contact['email'],
+            'isTest' => FALSE,
+            'PDFFilename' => ts('receipt') . '.pdf',
+            'isEmailPdf' => FALSE,
+          )
+        );
+        Civi::log()->debug(var_dump($sendReceipt));
+        Civi::log()->debug(var_dump($subject));
     }
     $url = "/user";
-    CRM_Utils_System::redirect($url);
+    //CRM_Utils_System::redirect($url);
     parent::run();
   }
-
+*/
 }
