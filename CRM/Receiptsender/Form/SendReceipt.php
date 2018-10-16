@@ -128,8 +128,6 @@ class CRM_Receiptsender_Form_SendReceipt extends CRM_Contribute_Form_Task_PDF {
         FALSE,
         $elements['params']['pdf_format_id']
       );
-      $url = "/user";
-      CRM_Utils_System::redirect($url);
     }
     else {
       if ($elements['suppressedEmails']) {
