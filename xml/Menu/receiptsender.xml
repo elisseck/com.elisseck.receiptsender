@@ -4,6 +4,6 @@
     <path>civicrm/send-receipt</path>
     <page_callback>CRM_Receiptsender_Form_SendReceipt</page_callback>
     <title>SendReceipt</title>
-    <access_arguments>access CiviCRM</access_arguments>
+    <access_arguments>access reciept</access_arguments>
   </item>
 </menu>

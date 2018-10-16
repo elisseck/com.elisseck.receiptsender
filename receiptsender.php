@@ -3,6 +3,23 @@
 require_once 'receiptsender.civix.php';
 use CRM_Receiptsender_ExtensionUtil as E;
 
+function receiptsender_civicrm_permission(&$permissions) {
+  $version = CRM_Utils_System::version();
+  if (version_compare($version, '4.6.1') >= 0) {
+    $permissions += array(
+      'access receipt' => array(
+        ts('Access Receipt', array('domain' => 'com.elisseck.receiptsender')),
+        ts('Grants permission to access downloadable receipts', array('domain' => 'com.elisseck.receiptsender')),
+      ),
+    );
+  }
+  else {
+    $permissions += array(
+      'access receipt' => ts('Access Receipt', array('domain' => 'com.elisseck.receiptsender')),
+    );
+  }
+}
+
 /**
  * Implements hook_civicrm_config().
  *
