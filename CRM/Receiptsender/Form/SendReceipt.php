@@ -125,8 +125,7 @@ class CRM_Receiptsender_Form_SendReceipt extends CRM_Contribute_Form_Task_PDF {
     if ($elements['createPdf']) {
       CRM_Utils_PDF_Utils::html2pdf($message,
         'civicrmContributionReceipt.pdf',
-        FALSE,
-        $elements['params']['pdf_format_id']
+        FALSE
       );
     }
     else {
