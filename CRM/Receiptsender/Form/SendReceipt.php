@@ -127,6 +127,7 @@ class CRM_Receiptsender_Form_SendReceipt extends CRM_Contribute_Form_Task_PDF {
         'civicrmContributionReceipt.pdf',
         FALSE
       );
+      CRM_Utils_System::civiExit();
     }
     else {
       if ($elements['suppressedEmails']) {
